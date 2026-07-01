@@ -3,7 +3,7 @@
 # Input:
 python3 scripts/run_clustering.py --subset=ade20k --model=resnet18 --pretrained=places365 --length=3 --beam_limit=5 --num_clusters=1 --device=cpu  --pre_load_masks=False --random_units=10 --root_models=data/model/ --root_datasets=data/dataset/ --root_segmentations=data/cache/segmentations/ --root_activations=data/cache/activations/ --root_results=data/results/ --seed=0
 
-# Output with :
+# Output:
 Loading model:resnet18
 	from data/model/zoo/resnet18_places365.pth.tar
 resnet18 loaded. Eval Modality
