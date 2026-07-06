@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: lthormod-task3
+ labels:
+   k8s-app: lthormod-task3
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     k8s-app: lthormod-task3
+ template:
+   metadata:
+     labels:
+       k8s-app: lthormod-task3
+   spec:
+     containers:
+     - name: lthormod-task3
+       image: pytorch/pytorch
+       resources:
+         limits:
+           memory: 100Gi
+           cpu: "20"
+         requests:
+           memory: 100Gi
+           cpu: "20"
+       command: [ "sh", "-c", "sleep infinity" ]
+       volumeMounts:
+       - mountPath: /pvcvolume
+         name: vol1
+     volumes:
+     - name: vol1
+       persistentVolumeClaim:
+         claimName: lthormod-task3
+     tolerations:
+     - effect: NoSchedule
+       key: nautilus.io/gilpin-lab
+       operator: Exists
+
