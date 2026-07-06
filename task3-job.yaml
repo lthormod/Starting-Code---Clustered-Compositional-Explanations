@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+ name: lthormod-task3
+spec:
+ template:
+   spec:
+     containers:
+     - name: lthormod-task3
+       image: pytorch/pytorch
+       command: ["/bin/bash", "-c"]
+       args:
+         - "pip install matplotlib && python /pvcvolume/cifar10train.py"
+       volumeMounts:
+       - name: pvcvolume
+         mountPath: /pvcvolume
+       resources:
+         limits:
+           memory: 100Gi
+           cpu: "32"
+         requests:
+           memory: 100Gi
+           cpu: "32"
+     volumes:
+     - name: pvcvolume
+       persistentVolumeClaim:
+         claimName: lthormod-task3
+     restartPolicy: Never
+ backoffLimit: 2
